@@ -35,9 +35,9 @@ const Messages = ({ socket }) => {
     messagesColumnRef.current.scrollTop = messagesColumnRef.current.scrollHeight
   }, [messagesReceived]);
 
-  function sortMessagesByDate(messages) {
+  function sortMessagesByDate(messages) { 
     return messages.sort(
-      (a, b) => parseInt(a.__createdTime__) - parseInt(b.__createdTime__)
+      (a, b) => parseInt(a.__createdTime__ || a.__createdtime__) - parseInt(b.__createdTime__ || b.__createdtime__)
     );
   }
 
@@ -47,7 +47,7 @@ const Messages = ({ socket }) => {
   }
 
   return (
-    <div className={styles.messageColumn} ref={messagesColumnRef}>
+    <div className={styles.messagesColumn} ref={messagesColumnRef}>
       {messagesReceived.map((msg, i) => (
         <div className={styles.message} key={i}>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
